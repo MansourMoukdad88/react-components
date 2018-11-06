@@ -1,5 +1,6 @@
 
-
+// evey change on the App function will be reflected on html page
+// Inside App we call GroceryList component
 var App = () => (
   <div>
     <h2>Grocery List</h2>
@@ -7,6 +8,7 @@ var App = () => (
   </div>
 );
 
+// In GroceryList we iteratet with map over the array (groceryItems) to reflected as a list
 var GroceryList = (props) => (
   <ul>
     {props.groceryItems.map(groceryItem =>
@@ -17,6 +19,7 @@ var GroceryList = (props) => (
 
 
 class GroceryListItem extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -24,8 +27,8 @@ class GroceryListItem extends React.Component {
       done: false
     };
   }
-
-  onListItemClick() {
+  // This function will be called when '<li>' below is hovered.
+  onListItemHover() {
     this.setState({
       done: !this.state.done
     });
@@ -34,13 +37,13 @@ class GroceryListItem extends React.Component {
   render() {
 
     var style = {
-      textDecoration: this.state.done ? 'line-through' : 'none'
+      fontWeight: this.state.done ? 'bold' : 'normal'
     };
 
     return (
-      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.groceryItem}</li>
+      <li style={style} onMouseEnter ={this.onListItemHover.bind(this)}>{this.props.groceryItem}</li>
     );
   }
 }
-
+// React DOM updates the DOM to appear on the page with the array list  
 ReactDOM.render(<App />, document.getElementById("app"));
